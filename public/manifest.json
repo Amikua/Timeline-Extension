@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Timeline Extension",
+    "version": "1.0.0",
+    "description": "Extension for amikua timeline that allows you to add events to projects",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*"
+    ],
+    "icons": {
+        "32": "vite.svg"
+    }
+}
