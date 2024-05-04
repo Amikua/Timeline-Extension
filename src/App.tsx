@@ -40,14 +40,8 @@ function Loader() {
 }
 
 function App() {
-  const [projectId, setProjectId] = createSignal(
-    localStorage.getItem("projectId") || "",
-  );
   const [apiKey, setApiKey] = createSignal(
     localStorage.getItem("apiKey") || "",
-  );
-  const [username, setUsername] = createSignal(
-    localStorage.getItem("username") || "",
   );
 
   const [allCategories] = createSignal([
@@ -74,20 +68,13 @@ function App() {
   const [isCreating, setIsCreating] = createSignal(false);
 
   createEffect(() => {
-    localStorage.setItem("projectId", projectId());
-  });
-
-  createEffect(() => {
     localStorage.setItem("apiKey", apiKey());
   });
 
-  createEffect(() => {
-    localStorage.setItem("username", username());
-  });
 
   const createEvent = async () => {
     setIsCreating(true);
-    if (!projectId() || !apiKey() || !username() || !category() || !content()) {
+    if (!apiKey() || !category() || !content()) {
       toast.error("Please fill all the fields");
       setIsCreating(false);
       return;
@@ -99,8 +86,6 @@ function App() {
       },
       body: JSON.stringify({
         apiKey: apiKey(),
-        projectId: projectId(),
-        username: username(),
         category: category(),
         content: content(),
       }),
@@ -123,19 +108,9 @@ function App() {
       <h1 class="my-2 text-lg font-thin">Timeline amikua</h1>
       <div>
         <StyledInput
-          value={projectId}
-          onChange={setProjectId}
-          placeholder="Project ID"
-        />
-        <StyledInput
           value={apiKey}
           onChange={setApiKey}
           placeholder="API Key"
-        />
-        <StyledInput
-          value={username}
-          onChange={setUsername}
-          placeholder="Username"
         />
       </div>
       <label class="block text-sm font-thin">Category</label>
